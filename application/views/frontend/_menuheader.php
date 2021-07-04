@@ -4,7 +4,7 @@
 			<div class="row">
 	    		<div class="col-md-6">
 					<div class="top_ber_left">
-						<i class="fa fa-map-marker mr-2"></i> <?php echo($adresse_info) ?>
+						<i class="fa fa-map-marker mr-2"></i> <?php echo(substr($adresse_info, 0,70)) ?>...
 					</div><!--top_ber_left-->
 	    		</div><!--col-md-6-->
 	    		<div class="col-md-6">
