@@ -1,92 +1,104 @@
-<div class="col-md-12">
-	<div class="row">
+<section id="fp-container">
+	<div class="container-fluid">	
+		<div class="row">
 
-		<!-- carousel principal -->
-    	<div class="col-md-12">
-    		<div class="feature_news_carousel">
-				<div id="featured-news-carousal" class="carousel slide" data-ride="carousel">
-				    <!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">					    
-						
-						<div class="item active feature_news_item">
-							<div class="item_wrapper">
-								<div class="item_img">
-									<img class="img-responsive" src="<?php echo(base_url())?>upload/annumation/site_bg.png" alt="Chania" style="height: 200px;">
-								</div> <!--item_img--> 
-								<div class="item_title_date">
-									<div class="news_item_title">
-										<h2><a href="javascript:void(0);">Nous sommes là pour les personnes qui ont tout perdu à cause des guerres ou des catastrophes naturelles.  </a></h2>
-									</div>
-                                    <div class="item_meta"><a href="#">
-                                    	
-                                    </a></div>
-								</div> <!--item_title_date-->
-							</div> <!--item_wrapper-->	
+
+			<?php 
+
+	
+				if ($infos_news->num_rows() <= 0) {
+					# code...
+				}
+				else{
+
+					foreach ($infos_news->result_array() as $row) {
+
+							?>
+
 							
-							<div class="item_content">
-								
-							</div>
-
-						</div><!--feature_news_item-->
-						<!-- debit -->
-						
-						<!-- fin -->
-
-						
-
-					</div><!--carousel-inner-->
-    			</div><!--carousel-->
-    		</div><!--feature_news_carousel-->
-    	</div><!--col-md-6-->
-
-		<div class="col-md-12" style="margin-top: 15px;">
-			<div class="row">
-
-				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<?php 
-
-		
-						if ($contact_info_site->num_rows() <= 0) {
-							# code...
-						}
-						else{
-
-							foreach ($contact_info_site->result_array() as $row) {
-
-									?>
-
-									<div class="col-md-12">
-										<?php echo(html_entity_decode($row['blog'])) ?>
+							<!-- Big Gallery Start -->
+							<div class="gallery bgallery clearfix">
+								<div class="gallery-img clearfix">
+									<div class="col-md-6 col-sm-4 no-padding">
+										<div class="post-item clearfix">
+											<div class="img-thumb">
+												
+												<a href="javascript:void(0);"><div class="fbt-resize" style="background-image: url('<?php echo(base_url()) ?>upload/annumation/logo5.jpg')"></div></a>
+												<div class="img-credits">
+													
+													<a href="javascript:void(0);"><h5 style="color: white;">Nous sommes là pour les personnes qui ont tout perdu à cause des guerres ou des catastrophes naturelles.</h5></a>
+													<div class="post-info clearfix">
+														<span><?php echo($nom_site_info) ?></span>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-
-									<div class="col-md-12">
-										<h2>Notre mission</h2>
-										<?php echo(html_entity_decode($row['mission'])) ?>
-									</div>
-
-									<div class="col-md-12">
-										<h2>Notre objectif</h2>
-										<?php echo(html_entity_decode($row['objectif'])) ?>
+									<div class="col-md-6 col-sm-4 big-section no-padding">
+										<div class="post-item clearfix">
+											<div class="img-thumb">
+												
+												<a href="javascript:void(0);"><div class="fbt-resize" style="background-image: url('<?php echo(base_url()) ?>upload/annumation/logo4.JPG')"></div></a>
+												<div class="img-credits">
+													
+													<a href="javascript:void(0);"><h5 style="color: white;"><?php echo($blog_info) ?></h5></a>
+													<div class="post-info clearfix">
+														
+														<span><?php echo($nom_site_info) ?></span>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 									
-									<?php
-								
+								</div>
+							</div><!-- Big Gallery End -->
+
+
+							<?php 
+
+		
+							if ($infos_news->num_rows() <= 0) {
 								# code...
 							}
-						}
+							else{
+
+								foreach ($infos_news->result_array() as $row) {
+
+										?>
+
+										<!-- Big Gallery Start -->
+										<!-- Big Gallery End -->
+
+										<div class="col-md-12">
+											<?php echo(html_entity_decode($row['apropos_text'])) ?>
+										</div>
+										
+										<?php
+									
+									# code...
+								}
+							}
 
 
-					?>
-				</div>
-				<div class="col-md-1"></div>
+						?>
 
-				<!-- Feature Video Item -->
-    			<?php include('_videos.php') ?>
 
-				
-			</div>
+
+							
+							<?php
+						
+						# code...
+					}
+				}
+
+
+			?>
+
+
 		</div>
-
 	</div>
-</div>
+</section>
+
+
+

@@ -28,11 +28,11 @@
 
 	            <!-- Earnings (Annual) Card Example -->
 	            <div class="col-xl-3 col-md-6 mb-4">
-	                <div class="card border-left-success shadow h-100 py-2">
+	                <div class="card border-left-hub shadow h-100 py-2">
 	                    <div class="card-body">
 	                        <div class="row no-gutters align-items-center">
 	                            <div class="col mr-2">
-	                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+	                                <div class="text-xs font-weight-bold text-hub text-uppercase mb-1">
 	                                    Nombre D'utilisateurs homes</div>
 	                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo($nombre_users_m); ?></div>
 	                            </div>
@@ -96,7 +96,7 @@
 			<div class="row">
 				<div class="col-md-6 mb-2">
 					<div class="card">
-						<div class="card-header bg-success text-white text-center">
+						<div class="card-header bg-hub text-white text-center">
 							Statistiques des utilisateurs par rapport à leurs sexe
 						</div>
 						<div class="card-body">
@@ -107,7 +107,7 @@
 
 				<div class="col-md-6">
 					<div class="card">
-						<div class="card-header bg-success text-white text-center">
+						<div class="card-header bg-hub text-white text-center">
 							Statistiques des utilisateurs par rapport à leurs sexe
 						</div>
 						<div class="card-body">

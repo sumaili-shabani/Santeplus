@@ -28,6 +28,21 @@
         	</div>
         </div>
 
+        <div class="form-group col-md-12">
+			<label>Apropos de nous santé plus</label>
+			<textarea class="form-control textarea" name="apropos_text">
+				
+			</textarea>
+		</div>
+
+		 <div class="form-group col-md-12">
+			<label>Faire un don</label>
+			<textarea class="form-control textarea" name="don">
+				
+			</textarea>
+		</div>
+
+
 		<div class="form-group col-md-12">
 			<label>Ce que nous faison</label>
 			<textarea class="form-control textarea" name="apropos">
@@ -57,7 +72,14 @@
 		</div>
 
 		<div class="form-group col-md-12">
-			<button type="submit" name="valider" class="btn btn-success pull-right">
+			<label>Structure de gestion</label>
+			<textarea class="form-control textarea" name="structure">
+				
+			</textarea>
+		</div>
+
+		<div class="form-group col-md-12">
+			<button type="submit" name="valider" class="btn btn-hub pull-right">
 				<i class="fa fa-save mr-1"></i> Enregistrer
 			</button>
 		</div>

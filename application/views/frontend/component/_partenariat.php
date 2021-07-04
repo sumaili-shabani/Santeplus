@@ -26,9 +26,7 @@
 
 		?>
 
-		<!-- Feature Video Item -->
-    	<?php include('_videos.php') ?>
-
+		
 
 	</div>
 </div>

@@ -77,7 +77,7 @@
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-success" type="button">
+                                <button class="btn btn-hub" type="button">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -102,7 +102,7 @@
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-success" type="button">
+                                            <button class="btn btn-hub" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>
@@ -122,7 +122,7 @@
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header bg-success">
+                                <h6 class="dropdown-header bg-hub" style="background-color: rgb(7, 102, 51); color: white;">
                                     Mes notifications
                                 </h6>
 
@@ -143,7 +143,7 @@
 
                                         <a class="dropdown-item d-flex align-items-center" href="<?php echo(base_url()) ?><?php echo($not['url']) ?>">
                                             <div class="mr-3">
-                                                <div class="icon-circle bg-success">
+                                                <div class="icon-circle bg-hub">
                                                     <i class="<?php echo($not["icone"]) ?> text-white"></i>
                                                 </div>
                                             </div>

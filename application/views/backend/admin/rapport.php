@@ -94,7 +94,7 @@
                                           ?>
                                           <tr>
                                             <td><?php echo(substr($key['titre'], 0,50)) ?>...</td>
-                                            <td><?php echo(substr($key['description'], 0,50)) ?>...</td>
+                                            <td>La description du rapport...</td>
                                             <td><?php echo($key['annee']) ?></td>
                                              <td>
                                               <a  href="<?php echo(base_url()) ?>upload/rapport/<?php echo($key['fichier']) ?>" class="text-primary">

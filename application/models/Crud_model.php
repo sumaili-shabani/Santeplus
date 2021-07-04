@@ -56,6 +56,14 @@ class crud_model extends CI_Model{
   var $order_column8 = array(null, "first_name", "last_name","telephone","sexe","id", null, null);
   // fin information
 
+   // opertion category information
+  var $table10 = "profile_publicite";  
+  var $select_column10 = array("idart","idp","etat", "nom","description","lien","image", 
+    "type","idcat","nom_cat","created_at");  
+  var $order_column10 = array(null, "nom","idp","etat","description","lien","type","idcat","nom_cat", "created_at");
+  // fin category
+
+
    // contact
   var $table12 = "contact";  
   var $select_column12 = array("id", "nom", "sujet","email", "message","fichier","created_at");  
@@ -3673,7 +3681,7 @@ class crud_model extends CI_Model{
               <div class="col-md-12 embed-responsive embed-responsive-21by9" style="height: 150px;"> 
 
                 <video src="'.base_url().'upload/video/'.$key->lien.'" class="col-md-12 " controls=""
-                 poster="'.$this->get_image().'">
+                 poster="'.base_url().'upload/video/'.$key->image.'">
                   <source src="'.base_url().'upload/video/'.$key->lien.'" type="video/p4">
                   <source src="'.base_url().'upload/video/'.$key->lien.'" type="video/webm">
                 </video>
@@ -3683,12 +3691,12 @@ class crud_model extends CI_Model{
 
               <div class="col-md-12" style="height: 70px;">
                 <div class="nk-block-head-content text-center">
-                    <h2 class="nk-block-title fw-normal">
+                    <h5 class="nk-block-title fw-normal">
                       <a href="'.base_url().'home/video/'.$key->code.'">
                       '.substr($key->nom, 0,40).'...
                        
                       </a>
-                    </h2>
+                    </h5>
                     <div class="nk-block-des">
                         <p>'.nl2br(substr(date(DATE_RFC822, strtotime($key->created_at)), 0, 23)).'</p>
                     </div>
@@ -3814,6 +3822,229 @@ class crud_model extends CI_Model{
     {  
        $this->db->insert('vues', $data);  
     }
+
+    // script pour nos publicite 
+  function make_query_publicite()  
+  {  
+      
+     $this->db->select($this->select_column10);  
+     $this->db->from($this->table10);
+     $this->db->limit(50);
+     
+     if(isset($_POST["search"]["value"]))  
+     {  
+          $this->db->like("idart", $_POST["search"]["value"]);  
+          $this->db->or_like("nom", $_POST["search"]["value"]);
+          $this->db->or_like("description", $_POST["search"]["value"]);
+          $this->db->or_like("lien", $_POST["search"]["value"]);
+          $this->db->or_like("nom_cat", $_POST["search"]["value"]);
+          $this->db->or_like("type", $_POST["search"]["value"]);
+          $this->db->or_like("etat", $_POST["search"]["value"]);
+     }  
+     if(isset($_POST["order"]))  
+     {  
+          $this->db->order_by($this->order_column10[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  
+     }  
+     else  
+     {  
+          $this->db->order_by('idp', 'DESC');  
+     }  
+  }
+
+   function make_datatables_publicite(){  
+         $this->make_query_publicite();  
+         if($_POST["length"] != -1)  
+         {  
+              $this->db->limit($_POST['length'], $_POST['start']);  
+         }  
+         $query = $this->db->get();  
+         return $query->result();  
+    }
+
+    function get_filtered_data_publicite(){  
+         $this->make_query_publicite();  
+         $query = $this->db->get();  
+         return $query->num_rows();  
+    }       
+    function get_all_data_publicite()  
+    {  
+         $this->db->select("*");  
+         $this->db->from($this->table10);  
+         return $this->db->count_all_results();  
+    }
+
+    function insert_publicite($data)  
+    {  
+         $this->db->insert('publicite', $data);  
+    }
+
+    
+    function update_publicite($idp, $data)  
+    {  
+         $this->db->where("idp", $idp);  
+         $this->db->update("publicite", $data);  
+    }
+
+
+    function delete_publicite($idp)  
+    {  
+         $this->db->where("idp", $idp);  
+         $this->db->delete("publicite");  
+    }
+
+    function fetch_single_publicite($idp)  
+    {  
+         $this->db->where("idp", $idp);  
+         $query=$this->db->get('publicite');  
+         return $query->result();  
+    } 
+    //fin de la publicite information
+
+    function Select_padding_articles_tri()
+    {
+        return $this->db->query('SELECT * FROM profile_publicite  ORDER BY RAND() LIMIT 6');
+    }
+
+    function Select_galery_publicite_lm3()
+    {
+        return $this->db->query('SELECT * FROM galery2 ORDER BY created_at DESC LIMIT 6');
+    }
+
+     function fetch_pagination_articles()
+    {
+      $this->db->limit(50);
+      $this->db->order_by('created_at', 'DESC');
+      $query = $this->db->query("SELECT * FROM profile_article");
+      return $query->num_rows();
+    }
+
+     // detail des articles par formations
+   function fetch_details_pagination_articles($limit, $start)
+   {
+    $output = '';
+    $this->db->select("*");
+    $this->db->from("profile_article");
+    $this->db->order_by("created_at", "DESC");
+    $this->db->limit($limit, $start);
+    $query = $this->db->get();
+
+
+
+    foreach($query->result() as $key)
+    {
+
+
+      $vues  =  $this->db->query("SELECT COUNT(idart) AS total FROM vues WHERE idart=".$key->idart." ");
+      if ($vues->num_rows() <=0) {
+        $nombre_vue = 0;
+      }
+      else{
+        foreach ($vues->result_array() as $key_vue) {
+          $nombre_vue = $key_vue['total'];
+        }
+      }
+
+     $output .= '
+      
+      <div class="col-md-4 col-sm-12 col-xs-6 fbt-vc-inner post-grid clearfix">
+        <div class="post-item clearfix">
+          <div class="img-thumb">
+            <a href="'.base_url().'home/article/'.$key->idart.'"><div class="fbt-resize" style="background-image: url('.base_url().'upload/article/'.$key->image.')"></div></a>
+          </div>
+          <div class="post-content">
+            <a href="'.base_url().'home/article/'.$key->idart.'"><h3>'.nl2br(substr($key->nom, 0,100)).'...</h3></a>
+            <div class="post-info clearfix">
+              <span><a href="javascript:void(0);"> <i class="fa fa-eye"></i>  '.$nombre_vue.' vue(s)</a></span>
+              <span>-</span>
+              <span>'.nl2br(substr(date(DATE_RFC822, strtotime($key->created_at)), 0, 23)).'</span>
+              <span>-</span>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+     ';
+    }
+    
+    return $output;
+   }
+
+    // recherche de articles
+   function fetch_data_search_articles($query)
+   {
+    $this->db->select("*");
+    $this->db->from("profile_article");
+    $this->db->limit(8);
+    if($query != '')
+    {
+     $this->db->like('nom', $query);
+     $this->db->or_like('description', $query);
+
+    }
+    $this->db->order_by('nom', 'ASC');
+    return $this->db->get();
+   }
+
+    // auto complete text offres d'emplois automatique
+   function recherche_data_auto_articles($query)
+   {
+
+      $this->db->like('nom', $query);
+      $this->db->or_like('description', $query);
+      $this->db->or_like('nom_cat', $query);
+      
+      $query = $this->db->get('profile_article');
+      if($query->num_rows() > 0)
+      {
+         foreach($query->result_array() as $row)
+         {
+          $output[] = array(
+           'idart'  => $row["idart"],
+           'name'  => $row["nom"],
+           'image'  => $row["image"]
+          );
+         }
+       echo json_encode($output);
+      }
+   }
+
+    function Select_our_articles_tag($idart)
+    {   
+        $this->db->limit(1);
+        return $this->db->get_where("profile_article", array(
+          'idart' =>  $idart
+        ));
+    }
+
+     function Select_our_commentaire_to_articles_tag($idart)
+    {   
+        $this->db->limit(1);
+        return $this->db->get_where("commentaire", array(
+          'idart' =>  $idart
+        ));
+    }
+
+     function Select_our_article_tag($idcat)
+    {   
+        $this->db->limit(12);
+        $this->db->order_by('created_at','DESC');
+        return $this->db->get_where("profile_article", array(
+          'idcat' =>  $idcat
+        ));
+    }
+
+    function get_name_article_cat($idcat){
+        $this->db->where("idcat", $idcat);
+        $nom = $this->db->get("profile_article")->result_array();
+        foreach ($nom as $key) {
+          $titre = $key["nom_cat"];
+          return $titre ;
+        }
+
+    }
+
 
 
 

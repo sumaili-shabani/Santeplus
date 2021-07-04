@@ -31,8 +31,11 @@ class home extends CI_Controller
             $data['title']          = "L'acccueil vous soit doux!";
             $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
 
+            $data['padding_articles']   = $this->crud_model->Select_padding_articles_tri();
+
             
             $data['categories']     = $this->crud_model->Select_category_menu();
+            $data['categories2']    = $this->crud_model->Select_category();
             $data['categories_all']     = $this->crud_model->Select_category_menu_all();
             
 
@@ -47,17 +50,23 @@ class home extends CI_Controller
             $data['infos_videos']  = $this->crud_model->Select_all_video();
 
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
+            $data['infos_news']  = $this->crud_model->Select_all_to_news();
+
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
             
-            $this->load->view('frontend/exemple', $data);
+            // $this->load->view('frontend/exemple', $data); 
+            $this->load->view('frontend/panel', $data);
         }
 
 
         function category($param1 =''){
-            $data['title']          = "Nos informations!";
+            $data['title']          = "Nos Articles!";
+            $data['title2']         = $this->crud_model->get_name_article_cat($param1);
             $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
 
             
             $data['categories']     = $this->crud_model->Select_category_menu();
+            $data['categories2']    = $this->crud_model->Select_category();
             $data['categories_all']     = $this->crud_model->Select_category_menu_all();
             
 
@@ -74,16 +83,27 @@ class home extends CI_Controller
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
 
             $data['category_article']  = $this->crud_model->Select_article_by_category($param1);
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+            $data['padding_articles']   = $this->crud_model->Select_padding_articles_tri();
+
+            $data['article_tag']  = $this->crud_model->Select_our_article_tag($param1);
+
+
+            $this->load->view('frontend/_pannelPub', $data);
+
             
-            $this->load->view('frontend/category', $data);
+            // $this->load->view('frontend/category', $data);
         }
 
         function article($param1 =''){
            
             $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
 
+            $data['padding_articles']   = $this->crud_model->Select_padding_articles_tri();
+
             
             $data['categories']     = $this->crud_model->Select_category_menu();
+            $data['categories2']    = $this->crud_model->Select_category();
             $data['categories_all']     = $this->crud_model->Select_category_menu_all();
             
 
@@ -98,16 +118,21 @@ class home extends CI_Controller
             $data['infos_videos']  = $this->crud_model->Select_all_video();
 
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
 
             if ($param1 !='') {
                 $title_job = $this->crud_model->get_name_article_pub($param1);
                 $data['title']          = $title_job;
                 $data['category_article']  = $this->crud_model->Select_article_by_tag($param1);
-                $this->load->view('frontend/article_tag', $data);
+                $data['offre_tag']  = $this->crud_model->Select_our_articles_tag($param1);
+                $data['commentaires']  = $this->crud_model->Select_our_commentaire_to_articles_tag($param1);
+                $this->load->view('frontend/_pannelArticle', $data);
             }
             else{
                 $data['title']          = "Nos publications";
                 $data['category_article']  = $this->crud_model->Select_article_all_ok();
+                $data['article_tag']  = $this->crud_model->Select_article_all_ok();
+                // $this->load->view('frontend/article', $data);
                 $this->load->view('frontend/article', $data);
 
             }
@@ -134,6 +159,10 @@ class home extends CI_Controller
             $data['infos_personnels']  = $this->crud_model->Select_all_tinfo_personnel();
 
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
+
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
 
             if ($param1 !='') {
                 $title_job = $this->crud_model->get_name_video_pub($param1);
@@ -167,6 +196,10 @@ class home extends CI_Controller
             $data['infos_personnels']  = $this->crud_model->Select_all_tinfo_personnel();
 
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
+
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
 
             if ($param1 !='') {
                 $title_job = $this->crud_model->get_name_rapport_pub($param1);
@@ -203,6 +236,10 @@ class home extends CI_Controller
 
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
 
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
              $this->load->view('frontend/galery', $data);
             
            
@@ -215,6 +252,7 @@ class home extends CI_Controller
 
             
             $data['categories']     = $this->crud_model->Select_category_menu();
+
             $data['categories_all']     = $this->crud_model->Select_category_menu_all();
             
 
@@ -225,16 +263,19 @@ class home extends CI_Controller
 
             $data['infos_services']  = $this->crud_model->Select_all_tinfo_service();
             $data['infos_personnels']  = $this->crud_model->Select_all_tinfo_personnel();
-
             $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
 
-             $this->load->view('frontend/contact', $data);
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
+            // $this->load->view('frontend/contact', $data);
+            $this->load->view('frontend/_contact_info', $data);
             
-           
         }
 
-        function don(){
-            $data['title']          = "don pour information";
+        function traval(){
+            $data['title']          = "Ce que nous faisons";
             $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
 
             
@@ -254,9 +295,71 @@ class home extends CI_Controller
 
             $data['infos_news']  = $this->crud_model->Select_all_to_news();
 
-             $this->load->view('frontend/don', $data);
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
+             $this->load->view('frontend/traval', $data);
             
            
+        }
+
+        function don(){
+            $data['title']          = "Nous faire un bon!";
+            $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
+
+            
+            $data['categories']     = $this->crud_model->Select_category_menu();
+            $data['categories_all']     = $this->crud_model->Select_category_menu_all();
+            
+
+            $data['article_blog_one']  = $this->crud_model->Select_article_by_cat();
+            $data['article_pub']  = $this->crud_model->Select_article_pub();
+
+            $data['member_pub']  = $this->crud_model->Select_all_member();
+
+            $data['infos_services']  = $this->crud_model->Select_all_tinfo_service();
+            $data['infos_personnels']  = $this->crud_model->Select_all_tinfo_personnel();
+
+            $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
+
+            $data['infos_news']  = $this->crud_model->Select_all_to_news();
+
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
+             $this->load->view('frontend/don', $data);
+         
+        }
+
+        function structure(){
+            $data['title']          = "Structure de gestion";
+            $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
+
+            
+            $data['categories']     = $this->crud_model->Select_category_menu();
+            $data['categories_all']     = $this->crud_model->Select_category_menu_all();
+            
+
+            $data['article_blog_one']  = $this->crud_model->Select_article_by_cat();
+            $data['article_pub']  = $this->crud_model->Select_article_pub();
+
+            $data['member_pub']  = $this->crud_model->Select_all_member();
+
+            $data['infos_services']  = $this->crud_model->Select_all_tinfo_service();
+            $data['infos_personnels']  = $this->crud_model->Select_all_tinfo_personnel();
+
+            $data['pub_publicite']  = $this->crud_model->Select_galery_publicite();
+
+            $data['infos_news']  = $this->crud_model->Select_all_to_news();
+
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
+             $this->load->view('frontend/structure', $data);
+         
         }
 
         function financement(){
@@ -281,6 +384,10 @@ class home extends CI_Controller
             $data['infos_news']  = $this->crud_model->Select_all_to_news();
 
             $data['infos_videos']  = $this->crud_model->Select_all_video();
+
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
 
             $this->load->view('frontend/financement', $data);
             
@@ -310,6 +417,10 @@ class home extends CI_Controller
             
             $data['infos_videos']  = $this->crud_model->Select_all_video();
 
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
             $this->load->view('frontend/carriere', $data);
             
            
@@ -338,6 +449,10 @@ class home extends CI_Controller
             
             $data['infos_videos']  = $this->crud_model->Select_all_video();
 
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
             $this->load->view('frontend/partenariat', $data);
             
            
@@ -365,6 +480,10 @@ class home extends CI_Controller
             $data['infos_news']  = $this->crud_model->Select_all_to_news();
             
             $data['infos_videos']  = $this->crud_model->Select_all_video();
+
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
 
             $this->load->view('frontend/member', $data);
             
@@ -395,7 +514,11 @@ class home extends CI_Controller
 
             $data['infos_videos']  = $this->crud_model->Select_all_video();
 
-             $this->load->view('frontend/about', $data);
+            $data['categories2']    = $this->crud_model->Select_category();
+            $data['pub_publicite3']  = $this->crud_model->Select_galery_publicite_lm3();
+
+
+            $this->load->view('frontend/about', $data);
             
            
         }
@@ -488,7 +611,7 @@ class home extends CI_Controller
                               <div class="col-md-12 embed-responsive embed-responsive-21by9" style="height: 150px;"> 
 
                                 <video src="'.base_url().'upload/video/'.$key->lien.'" class="col-md-12 " controls=""
-                                 poster="'.$this->get_image().'">
+                                 poster="'.base_url().'upload/video/'.$key->image.'">
                                   <source src="'.base_url().'upload/video/'.$key->lien.'" type="video/p4">
                                   <source src="'.base_url().'upload/video/'.$key->lien.'" type="video/webm">
                                 </video>
@@ -498,12 +621,12 @@ class home extends CI_Controller
 
                               <div class="col-md-12" style="height: 70px;">
                                 <div class="nk-block-head-content text-center">
-                                    <h2 class="nk-block-title fw-normal">
+                                    <h5 class="nk-block-title fw-normal">
                                       <a href="'.base_url().'home/video/'.$key->code.'">
                                       '.substr($key->nom, 0,40).'...
                                        
                                       </a>
-                                    </h2>
+                                    </h5>
                                     <div class="nk-block-des">
                                         <p>'.nl2br(substr(date(DATE_RFC822, strtotime($key->created_at)), 0, 23)).'</p>
                                     </div>
@@ -636,6 +759,141 @@ class home extends CI_Controller
         }
         
     }
+
+
+        // pagination de articles
+     function pagination_access_our_article()
+     {
+
+      $this->load->library("pagination");
+      $config = array();
+      $config["base_url"] = "#";
+      $config["total_rows"] = $this->crud_model->fetch_pagination_articles();
+      $config["per_page"] = 3;
+      $config["uri_segment"] = 3;
+      $config["use_page_numbers"] = TRUE;
+      $config["full_tag_open"] = '<ul class="flex-wr-c-c m-rl--7 p-t-15 pagination mb-0 pagination-list">';
+      $config["full_tag_close"] = '</ul>';
+      $config["first_tag_open"] = '<li class="page-item">';
+      $config["first_tag_close"] = '</li>';
+      $config["last_tag_open"] = '<li class="page-item">';
+      $config["last_tag_close"] = '</li>';
+      $config['next_link'] = '<li class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active page-item active"><i class="" style="color:white;">&gt;&gt;</i>';
+      $config["next_tag_open"] = '<li class="page-item">';
+      $config["next_tag_close"] = '</li>';
+      $config["prev_link"] = '<li class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active page-item active"><i class="" style="color:white;">&lt;&lt;</i>';
+      $config["prev_tag_open"] = "<li class='page-item'>";
+      $config["prev_tag_close"] = "</li>";
+      $config["cur_tag_open"] = "<li class='flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active page-item active'><a href='#' class='page-link'>";
+      $config["cur_tag_close"] = "</a></li>";
+      $config["num_tag_open"] = "<li class='page-item'>";
+      $config["num_tag_close"] = "</li>";
+      $config["num_links"] = 1;
+      $this->pagination->initialize($config);
+      $page = $this->uri->segment(3);
+      $start = ($page - 1) * $config["per_page"];
+
+      $output = array(
+       'pagination_link' => $this->pagination->create_links(),
+       'country_table'   => $this->crud_model->fetch_details_pagination_articles($config["per_page"], $start)
+      );
+      echo json_encode($output);
+     }
+
+
+     // recherche de formations
+     function fetch_search_our_articles()
+     {
+          $output = '';
+          $query = '';
+          if($this->input->post('query'))
+          {
+           $query = $this->input->post('query');
+          }
+          $data = $this->crud_model->fetch_data_search_articles($query);
+          
+          if($data->num_rows() > 0)
+          {
+
+              
+               foreach($data->result() as $key)
+               {
+
+                 $vues  =  $this->db->query("SELECT COUNT(idart) AS total FROM vues WHERE idart=".$key->idart." ");
+                  if ($vues->num_rows() <=0) {
+                    $nombre_vue = 0;
+                  }
+                  else{
+                    foreach ($vues->result_array() as $key_vue) {
+                      $nombre_vue = $key_vue['total'];
+                    }
+                  }
+
+                $output .= '
+                  <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                    <!-- Item latest -->
+                    <div class="m-b-45">
+                      <a href="'.base_url().'home/article/'.$key->idart.'" class="wrap-pic-w hov1 trans-03">
+                        <img src="'.base_url().'upload/article/'.$key->image.'" alt="IMG" style="height: 200px;">
+                      </a>
+                      <div class="p-t-16">
+                        <h5 class="p-b-5">
+                          <a href="'.base_url().'home/article/'.$key->idart.'" class="f1-m-3 cl2 hov-cl10 trans-03">
+                            '.nl2br(substr($key->nom, 0,100)).'...
+                          </a>
+                        </h5>
+                        <span class="cl8">
+                         
+                          <span class="f1-s-3 m-rl-3">
+                            <i class="fa fa-eye"></i>  '.$nombre_vue.' vue(s) &nbsp;&nbsp; - &nbsp;&nbsp;
+                          </span>
+                          <span class="f1-s-3">
+                            '.nl2br(substr(date(DATE_RFC822, strtotime($key->created_at)), 0, 23)).'
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                 ';
+
+               }
+          }
+          else
+          {
+                $output .= '
+                    <div class="media text-muted pt-3">
+                        <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 100%; height: auto;" src="data:'.base_url().'upload/annumation/a.gif" srcset="'.base_url().'upload/annumation/a.gif" data-holder-rendered="true">
+                        
+                      </div>
+                ';
+          }
+
+        echo $output;
+     }
+
+     // fin script articles 
+
+    /*
+    *======================================
+    les script commence pour la articles
+    =======================================
+    ___________________________________________
+    */
+
+    // auto complete text roffres d'emplois
+    function fetch_auto_offres_articles()
+    {
+        echo $this->crud_model->fetch_data_auto_articles($this->uri->segment(3));
+    }
+
+    // auto complete text roffres d'emplois
+    function search_auto_offres_articles()
+    {
+        echo $this->crud_model->recherche_data_auto_articles($this->uri->segment(3));
+    }
+
 
 
 

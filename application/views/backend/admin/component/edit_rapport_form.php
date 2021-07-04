@@ -127,7 +127,7 @@
 
 
 				<div class="form-group col-md-12">
-					<button type="submit" name="valider" class="btn btn-success pull-right">
+					<button type="submit" name="valider" class="btn btn-hub pull-right">
 						<i class="fa fa-edit mr-1"></i> Modifier
 					</button>
 				</div>

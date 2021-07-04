@@ -1,5 +1,5 @@
   <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-hub sidebar sidebar-dark accordion hub" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);">
@@ -38,6 +38,7 @@
                         <a class="collapse-item" href="<?php echo(base_url()) ?>admin/category">Catégorie</a>
                         <a class="collapse-item" href="<?php echo(base_url()) ?>admin/article">Média Article</a>
 
+                        <a class="collapse-item" href="<?php echo(base_url()) ?>admin/publicite">Publicité Article</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="collapse-item" href="<?php echo(base_url()) ?>admin/commentaire">Comment des articles</a>

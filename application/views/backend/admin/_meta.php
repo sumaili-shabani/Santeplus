@@ -142,4 +142,17 @@ if ($contact_info_site->num_rows() > 0) {
       margin-bottom: 24px;
       box-shadow: 10px 10px 5px #eeeeee;
     }
+
+     .hub{
+      background-color: rgb(7, 102, 51);
+     } 
+     .bg-hub{
+      background-color: rgb(7, 102, 51);
+      color:white;
+     } 
+     .btn-hub{
+      background-color: rgb(7, 102, 51);
+      color:white;
+     } 
+
 </style>

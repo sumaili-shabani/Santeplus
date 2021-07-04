@@ -90,7 +90,19 @@ if ($contact_info_site->num_rows() > 0) {
           border:1px solid #ccc;  
           border-radius:5px;  
           margin-top:10px;  
-     }  
+     }
+
+     .hub{
+      background-color: rgb(7, 102, 51);
+     } 
+     .bg-hub{
+      background-color: rgb(7, 102, 51);
+      color:white;
+     } 
+     .btn-hub{
+      background-color: rgb(7, 102, 51);
+      color:white;
+     }   
 </style>  
 
 <style>

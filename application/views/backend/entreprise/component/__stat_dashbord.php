@@ -171,7 +171,7 @@
 
 				<div class="col-md-6">
 				  <div class="card">
-				    <div class="card-header text-white bg-success">
+				    <div class="card-header text-white bg-hub">
 				      Statistique de paiement par raport au genre de sexe
 				    </div>
 				    <div class="card-body">

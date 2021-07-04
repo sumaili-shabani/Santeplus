@@ -14,7 +14,7 @@
 						?>
 
 						<div class="col-md-12">
-							<?php echo(html_entity_decode($row['apropos'])) ?>
+							<?php echo(html_entity_decode($row['don'])) ?>
 						</div>
 						
 						<?php

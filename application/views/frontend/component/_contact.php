@@ -19,14 +19,48 @@
 	                    	<div class="form-group">
 	                           
 	                            <div class="form-control-wrap">
-	                                <input type="text" name="name" id="name" class="form-control form-control-lg bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" placeholder="Entrez votre nom">
+	                                <input type="text" name="name" id="name" class="form-control form-control" placeholder="Entrez votre nom" style=" 
+	                                display: block;
+								    width: 100%;
+								    height: 34px;
+								    padding: 6px 12px;
+								    font-size: 14px;
+								    line-height: 1.42857143;
+								    color: #555;
+								    background-color: #fff;
+								    background-image: none;
+								    border: 1px solid #ccc;
+								    border-radius: 4px;
+								    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+								    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+								    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+								    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+								    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+									                                ">
 	                            </div>
 	                        </div>
 
 	                        <div class="form-group">
 	                           
 	                            <div class="form-control-wrap">
-	                                <input type="text" name="subject" id="subject" class="form-control form-control-lg bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" placeholder="Entrez votre sujet ">
+	                                <input type="text" name="subject" id="subject" class="form-control form-control-lg bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" placeholder="Entrez votre sujet" style=" 
+	                                display: block;
+								    width: 100%;
+								    height: 34px;
+								    padding: 6px 12px;
+								    font-size: 14px;
+								    line-height: 1.42857143;
+								    color: #555;
+								    background-color: #fff;
+								    background-image: none;
+								    border: 1px solid #ccc;
+								    border-radius: 4px;
+								    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+								    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+								    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+								    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+								    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+									                                ">
 	                            </div>
 	                        </div>
 
@@ -110,13 +144,13 @@
 									    		<span class="text-info"><i class="fa fa-google"></i> Adresse email:</span>  <span class="text-info"><?php echo($row['email']); ?></span>
 									    	</li>
 									    	<li>
-									    		<span class="text-info"><i class="fa fa-phone"></i> Numéro de téléphone Principal:</span>  <?php echo($row['tel1']); ?> 
+									    		<span class="text-info"><i class="fa fa-phone"></i> Numéro de téléphone Principal:</span>  <a href="tel:<?php echo($row['tel1']); ?>"><?php echo($row['tel1']); ?> </a>
 									    	</li>
 									    	<li>
-									    		<span class="text-info"><i class="fa fa-phone"></i> Autre Numéro de téléphone:</span>  <?php echo($row['tel2']); ?>
+									    		<span class="text-info"><i class="fa fa-phone"></i> Autre Numéro de téléphone:</span>  <a href="tel:<?php echo($row['tel2']); ?>"><?php echo($row['tel2']); ?></a>
 									    	</li>
 									    	<li>
-									    		<span class="text-info"><i class="fa fa-map"></i> Adresse domicile:</span>  <span class="text-soft"><?php echo($row['adresse']); ?></span>
+									    		<span class="text-info"><i class="fa fa-map"></i> Adresse domicile:</span>  <span class="text-soft"><?php echo(nl2br($row['adresse'])); ?></span>
 									    	</li>
 									    </ul>
 								    </div>

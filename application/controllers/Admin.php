@@ -199,6 +199,17 @@ class admin extends CI_Controller
 	      $this->load->view('backend/admin/rapport', $data);
 	    }
 
+	    function publicite(){
+		    $data['title']        ="Paramétrage  des publicités pour les publications";
+		    $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
+
+		    $data['articles']     = $this->crud_model->Select_articles();
+		    $data['categories']   = $this->crud_model->Select_category();
+
+		    $this->load->view('backend/admin/publicite', $data);  
+		}
+
+
 	    function add_rapport(){
 	      $data['title']="Ajout d'un rapport!";
 	      $data['contact_info_site']  = $this->crud_model->Select_contact_info_site(); 
@@ -3287,7 +3298,10 @@ class admin extends CI_Controller
       	  if($param1 =="ajout")  
           {  
                 $insert_data = array(  
-		           'apropos'      	=>     $this->input->post('apropos'),  
+		           'apropos'      	=>     $this->input->post('apropos'),
+		           'don'      		=>     $this->input->post('don'), 
+		           'structure'      =>     $this->input->post('structure'),
+		           'apropos_text'   =>     $this->input->post('apropos_text'),  
 		           'financement'    =>     $this->input->post('financement'), 
 		           'carierre'      	=>     $this->input->post('carierre'), 
 		           'partenariat'    =>     $this->input->post('partenariat')
@@ -3301,7 +3315,10 @@ class admin extends CI_Controller
           if($param1 =="modification")  
           {  
                 $update_data = array(  
-		           'apropos'      	=>     $this->input->post('apropos'),  
+		           'apropos'      	=>     $this->input->post('apropos'), 
+		           'don'      		=>     $this->input->post('don'), 
+		           'structure'      =>     $this->input->post('structure'),
+		           'apropos_text'   =>     $this->input->post('apropos_text'), 
 		           'financement'    =>     $this->input->post('financement'), 
 		           'carierre'      	=>     $this->input->post('carierre'), 
 		           'partenariat'    =>     $this->input->post('partenariat')
@@ -3435,6 +3452,124 @@ class admin extends CI_Controller
             return $new_name;  
        }  
 	}
+
+
+	// script de publicite
+      function fetch_publicite(){  
+
+           $fetch_data = $this->crud_model->make_datatables_publicite();  
+           $data = array();  
+           $etat2 = '';
+           $etat = '';
+           foreach($fetch_data as $row)  
+           {  
+                $sub_array = array(); 
+
+                if ($row->type=='texte') {
+                  $etat2 = '
+                <div class="user-avatar bg-dim-primary d-none d-sm-flex">
+                    <span><i class="fa fa-file text-primary" ></i></span>
+                </div>
+                 ';
+                }
+                elseif ($row->type=='video'){
+                  $etat2 = '
+                    <div class="user-avatar bg-dim-danger d-none d-sm-flex">
+                        <span><i class="fa fa-video-camera text-primary"></i></span>
+                    </div>
+                ';
+                }
+                else{
+
+                  $etat2 = '';
+                }
+
+                if ($row->etat == 1) {
+                  $etat = '<a href="javascript:void(0);" type="button" name="pdf" idp="'.$row->idp.'" class="btn btn-primary btn-sm desactiver"><i class="fa fa-check"></i> Activé</a>';
+                }
+                else{
+
+                    $etat = '<a href="javascript:void(0);" type="button" name="pdf" idp="'.$row->idp.'" class="btn btn-danger btn-sm  activer"><i class="fa fa-close"></i> Desactivé</a>';
+                }
+
+                $sub_array[] = $etat2; 
+
+
+               
+               
+                // $sub_array[] = '<img src="'.base_url().'upload/article/'.$row->image.'" class="img-thumbnail user-avatar bg-success  d-sm-flex" width="50" height="35" />';  
+                $sub_array[] = nl2br(substr($row->nom, 0,20)).'...';  
+                $sub_array[] = nl2br(substr($row->description, 0,10)).'...'; 
+
+                $sub_array[] = nl2br(substr($row->nom_cat, 0,15)).' ...';
+
+                $sub_array[] = nl2br(substr($row->type, 0,15)).'';
+
+                $sub_array[] = nl2br(substr(date(DATE_RFC822, strtotime($row->created_at)), 0, 23)); 
+
+               
+                 $sub_array[] = $etat; 
+
+                $sub_array[] = '<button type="button" name="delete2" idp="'.$row->idp.'" class="btn btn-danger btn-circle btn-sm delete2"><i class="fa fa-trash"></i></button>';
+                
+                $data[] = $sub_array;  
+           }  
+           $output = array(  
+                "draw"                =>     intval($_POST["draw"]),  
+                "recordsTotal"        =>     $this->crud_model->get_all_data_publicite(),  
+                "recordsFiltered"     =>     $this->crud_model->get_filtered_data_publicite(),  
+                "data"                =>     $data  
+           );  
+           echo json_encode($output);  
+      }
+
+      
+
+      function operation_publicite()
+      {
+          if($this->input->post('checkbox_value'))
+          {
+             $id = $this->input->post('checkbox_value');
+             for($count = 0; $count < count($id); $count++)
+             {
+                $insert_data = array(  
+                   'idart'    =>     $id[$count]  
+                ); 
+                $this->crud_model->insert_publicite($insert_data);
+             }
+             echo("suppression avec succès");
+          }
+
+      }
+
+      function activation_publicite(){
+
+          $updated_data = array(  
+             'etat'  =>     1
+          ); 
+
+          $this->crud_model->update_publicite($this->input->post("idp"), $updated_data);
+          echo("la publicité est activée avec succès 👌");
+      }
+
+      function desactivation_publicite(){
+
+          $updated_data = array(  
+             'etat'  =>     0
+          ); 
+
+          $this->crud_model->update_publicite($this->input->post("idp"), $updated_data);
+          echo("🏧 la publicité est desactivée avec succès🏧");
+      }
+
+      
+      function supression_publicite(){
+ 
+          $this->crud_model->delete_publicite($this->input->post("idp"));
+          echo("suppression avec succès");
+        
+      }
+  // fin de sript publicite 
 
 
 

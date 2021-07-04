@@ -25,7 +25,7 @@
 						
 						<!-- bloc 1 -->
 						<div class="col-md-4  mr-1 mb-2">
-							<div class="col-md-12 most_comment plan-item-card">
+							<div class="col-md-12 most_comment plan-item-card card">
 				                <div class="plan-item-head card-body">
 				                    <div class="plan-item-heading add">
 
@@ -83,9 +83,7 @@
 
 				?>
 
-		<!-- Feature Video Item -->
-    	<?php include('_videos.php') ?>
-
+		
 
 	</div>
 </div>

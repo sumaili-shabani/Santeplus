@@ -26,11 +26,11 @@
 
 	            <!-- Earnings (Annual) Card Example -->
 	            <div class="col-xl-3 col-md-6 mb-4">
-	                <div class="card border-left-success shadow h-100 py-2">
+	                <div class="card border-left-hub shadow h-100 py-2">
 	                    <div class="card-body">
 	                        <div class="row no-gutters align-items-center">
 	                            <div class="col mr-2">
-	                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+	                                <div class="text-xs font-weight-bold text-hub text-uppercase mb-1">
 	                                    Nombre D'utilisateurs homes</div>
 	                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo($nombre_users_m); ?></div>
 	                            </div>
@@ -101,7 +101,7 @@
 					        <div class="row">
 					           <div class="col-md-12">
 					           	
-					             <button class="btn btn-dim btn-sm btn-outline-success pull-right  mb-4" id="add_button" data-toggle="modal" data-target="#userModal"><i class="fa fa-plus"></i>Effectuer l'opération</button>
+					             <button class="btn btn-dim btn-sm btn-outline-hub pull-right  mb-4" id="add_button" data-toggle="modal" data-target="#userModal"><i class="fa fa-plus"></i>Effectuer l'opération</button>
 					           </div>
 					         </div>
 					    </div>
@@ -129,7 +129,7 @@
 		                       		?>
 		                       		<tr>
 			                       		<td>
-			                       			<img src="<?php echo(base_url()) ?>upload/photo/<?php echo($key['image']) ?>" class="img img-responsive img-thumbnail user-avatar bg-success  d-sm-flex" width="50" height="35">
+			                       			<img src="<?php echo(base_url()) ?>upload/photo/<?php echo($key['image']) ?>" class="img img-responsive img-thumbnail user-avatar bg-hub  d-sm-flex" width="50" height="35">
 			                       		</td>
 			                       		<td><?php echo(substr($key['first_name'], 0,20)) ?>...</td>
 			                       		<td><?php echo(substr($key['last_name'], 0,20)) ?>...</td>
