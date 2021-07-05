@@ -38,7 +38,7 @@
 										<div class="post-item clearfix">
 											<div class="img-thumb">
 												
-												<a href="javascript:void(0);"><div class="fbt-resize" style="background-image: url('<?php echo(base_url()) ?>upload/annumation/logo4.JPG')"></div></a>
+												<a href="javascript:void(0);"><div class="fbt-resize" style="background-image: url('<?php echo(base_url()) ?>upload/annumation/IMG_8169.JPG')"></div></a>
 												<div class="img-credits">
 													
 													<a href="javascript:void(0);"><h5 style="color: white;"><?php echo($blog_info) ?></h5></a>
